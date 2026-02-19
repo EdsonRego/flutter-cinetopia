@@ -9,8 +9,8 @@ class Cinetopia extends StatelessWidget {
     return MaterialApp(
       title: "Cinetopia",
       theme: ThemeData(
-        brightness: Brightness.dark, 
-        useMaterial3: true, 
+        brightness: Brightness.dark,
+        useMaterial3: true,
         colorSchemeSeed: Colors.deepPurple,
       ),
       home: HomePage(),

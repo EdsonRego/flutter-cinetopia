@@ -1,8 +1,10 @@
 import 'package:cinetopia/app/viewmodels/search_movies_viewmodel.dart';
 import 'package:cinetopia/ui/components/movie_card.dart';
+import 'package:cinetopia/ui/screens/movie_details.dart';
 import 'package:flutter/material.dart';
 
 class SearchMovies extends StatefulWidget {
+
   SearchMovies({super.key});
 
   @override
@@ -23,7 +25,11 @@ class _SearchMoviesState extends State<SearchMovies> {
           return CustomScrollView(
             slivers: <Widget>[
               SliverToBoxAdapter(
-                child: Image.asset("assets/movie.png", height: 80, width: 80),
+                child: Image.asset(
+                  "assets/popular.png",
+                  height: 80,
+                  width: 80,
+                ),
               ),
               SliverToBoxAdapter(
                 child: Padding(
@@ -41,7 +47,7 @@ class _SearchMoviesState extends State<SearchMovies> {
                   child: TextField(
                     controller: textController,
                     onEditingComplete: () {
-                      FocusScope.of(context).unfocus(); 
+                      FocusScope.of(context).unfocus();
                       setState(() {});
                     },
                     decoration: InputDecoration(
@@ -54,16 +60,21 @@ class _SearchMoviesState extends State<SearchMovies> {
                 ),
               ),
               SliverList.builder(
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
-                  child: MovieCard(movie: viewmodel.moviesList[index]),
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetails(movie: viewmodel.moviesList[index]))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 32),
+                    child: MovieCard(movie: viewmodel.moviesList[index]),
+                  ),
                 ),
                 itemCount: viewmodel.moviesList.length,
               ),
             ],
           );
         } else {
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );
